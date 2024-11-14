@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <string>
 #include <assert.h>
+#include <functional>
 
 #include <mmsystem.h>
 

@@ -37,20 +37,44 @@ void SpriteRenderer::Render(HDC hdc)
 
 	Transform* tr = GetOwner()->GetComponent<Transform>();
 	Vector2 pos = tr->GetPosition();
-
+	Vector2 scale = tr->GetScale();
+	float rot = tr->GetRotation();
+	
 	pos = mainCamera->CalculatePosition(pos);
 
 	if (mTexture->GetTextureType() == eTextureType::Png)
 	{
+		Gdiplus::ImageAttributes imgAtt = {};
+
+		imgAtt.SetColorKey(Gdiplus::Color(230, 230, 230), Gdiplus::Color(255, 255, 255));
+
+
 		Gdiplus::Graphics graphics(hdc);
-		graphics.DrawImage(mTexture->GetImage(), Gdiplus::Rect(pos.x, pos.y, mTexture->GetWidth(), mTexture->GetHeight()));
+		graphics.TranslateTransform(pos.x, pos.y);
+		graphics.RotateTransform(rot);
+		graphics.TranslateTransform(-pos.x, -pos.y);
+		
+		graphics.DrawImage(mTexture->GetImage()
+			, Gdiplus::Rect
+			(
+				pos.x
+				, pos.y
+				, mTexture->GetWidth() * mSize.x * scale.x
+				, mTexture->GetHeight() * mSize.y * scale.y
+			)
+			, 0, 0
+			, mTexture->GetWidth()
+			, mTexture->GetHeight()
+			, Gdiplus::UnitPixel
+			, /*&imgAtt*/ nullptr
+		);
 	}
 	else if (mTexture->GetTextureType() == eTextureType::Bmp)
 	{
 		TransparentBlt(hdc
 			, pos.x, pos.y
-			, mTexture->GetWidth() * mSize.x
-			, mTexture->GetHeight() * mSize.y
+			, mTexture->GetWidth() * mSize.x * scale.x
+			, mTexture->GetHeight() * mSize.y * scale.y
 			, mTexture->GetHdc()
 			, 0, 0
 			, mTexture->GetWidth()

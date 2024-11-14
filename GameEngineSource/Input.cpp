@@ -1,12 +1,17 @@
 #include "Input.h"
+#include "Application.h"
+
+extern Application app;
 
 std::vector<Input::Key> Input::mKeys = {};
+Vector2 Input::mMousePos = {};
 
 int ASCII[(UINT)eKeyCode::END] = {
 	'Q','W','E','R','T','Y','U','I','O','P',
 	'A','S','D','F','G','H','J','K','L',
 	'Z','X','C','V','B','N','M',
-	VK_LEFT,VK_RIGHT,VK_UP,VK_DOWN
+	VK_LEFT,VK_RIGHT,VK_UP,VK_DOWN,
+	VK_LBUTTON,VK_MBUTTON,VK_RBUTTON,
 };
 
 void Input::Init()
@@ -69,14 +74,20 @@ void Input::UpdateKeys()
 
 void Input::UpdateKey(Input::Key& key)
 {
-	if (IsKeyDown(key.keyCode))
+	if (GetFocus())
 	{
-		UpdateKeyDown(key);
+		if (IsKeyDown(key.keyCode))
+		{
+			UpdateKeyDown(key);
+		}
+		else
+		{
+			UpdateKeyUp(key);
+		}
+		getMousePositionByWindow();
 	}
 	else
-	{
-		UpdateKeyUp(key);
-	}
+		clearKeys();
 }
 
 bool Input::IsKeyDown(eKeyCode keyCode)
@@ -100,4 +111,26 @@ void Input::UpdateKeyUp(Input::Key& key)
 	else
 		key.state = eKeyState::None;
 	key.bPressed = false;
+}
+
+void Input::getMousePositionByWindow()
+{
+	POINT mousePos = {};
+	GetCursorPos(&mousePos);
+	ClientToScreen(app.GetHwnd(), &mousePos);
+	mMousePos.x = mousePos.x;
+	mMousePos.y = mousePos.y;
+}
+
+void Input::clearKeys()
+{
+	for (Key& key : mKeys)
+	{
+		if (key.state == eKeyState::Pressed || key.state == eKeyState::Down)
+			key.state = eKeyState::Up;
+		else if (key.state == eKeyState::Up)
+			key.state = eKeyState::None;
+
+		key.bPressed = false;
+	}
 }

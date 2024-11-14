@@ -15,6 +15,7 @@ enum class eKeyCode
 	A,S,D,F,G,H,J,K,L,
 	Z,X,C,V,B,N,M,
 	Left,Right,Up,Down,
+	LButton,MButton,RButton,
 	END,
 };
 
@@ -33,6 +34,7 @@ public:
 	static bool GetKeyDown(eKeyCode keyCode) { return mKeys[(UINT)keyCode].state == eKeyState::Down; }
 	static bool GetKeyUp(eKeyCode keyCode){ return mKeys[(UINT)keyCode].state == eKeyState::Up; }
 	static bool GetKey(eKeyCode keyCode){ return mKeys[(UINT)keyCode].state == eKeyState::Pressed; }
+	static Vector2 GetMousePos() { return mMousePos; }
 private:
 	static void CreateKeys();
 	static void UpdateKeys();
@@ -40,7 +42,10 @@ private:
 	static bool IsKeyDown(eKeyCode keyCode);
 	static void UpdateKeyDown(Input::Key& key);
 	static void UpdateKeyUp(Input::Key& key);
+	static void getMousePositionByWindow();
+	static void clearKeys();
 private:
 	static std::vector<Key> mKeys;
+	static Vector2 mMousePos;
 };
 

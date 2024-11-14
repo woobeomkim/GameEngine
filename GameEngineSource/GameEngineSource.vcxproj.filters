@@ -88,6 +88,12 @@
     <ClInclude Include="Animator.h">
       <Filter>Component\Animator</Filter>
     </ClInclude>
+    <ClInclude Include="CatScript.h">
+      <Filter>Component\Script\CatScript</Filter>
+    </ClInclude>
+    <ClInclude Include="Cat.h">
+      <Filter>Player\Animal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -149,6 +155,12 @@
     </Filter>
     <Filter Include="Component\SpriteRenderer\Transform">
       <UniqueIdentifier>{b5cd8fdf-ac34-48c6-bc9f-00a9f1e529c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\Script\CatScript">
+      <UniqueIdentifier>{b4517edd-a948-4a23-84f5-724ff0fe9eca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\Animal">
+      <UniqueIdentifier>{de149746-d9a2-4ee4-9299-7e442a62ae88}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +235,12 @@
     </ClCompile>
     <ClCompile Include="Animator.cpp">
       <Filter>Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="CatScript.cpp">
+      <Filter>Component\Script\CatScript</Filter>
+    </ClCompile>
+    <ClCompile Include="Cat.cpp">
+      <Filter>Player\Animal</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

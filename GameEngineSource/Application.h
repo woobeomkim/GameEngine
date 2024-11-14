@@ -16,6 +16,7 @@ public:
 	HDC GetMainHdc() { return mHdc; }
 	UINT GetWidth() { return mWidth;}
 	UINT GetHeight() { return mHeight;}
+	HWND GetHwnd() { return mHwnd; }
 
 private:
 	void adjustWindowRect(HWND hwnd, UINT width, UINT height);

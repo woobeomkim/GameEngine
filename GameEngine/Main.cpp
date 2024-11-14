@@ -37,6 +37,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // TODO: 여기에 코드를 입력합니다.
 
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    _CrtSetBreakAlloc(618);
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_GAMEENGINE, szWindowClass, MAX_LOADSTRING);
@@ -118,8 +120,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   const UINT width = 1000;
-   const UINT height = 1000;
+   const UINT width = 1600;
+   const UINT height = 960;
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
@@ -139,6 +141,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    LoadResources();
    LoadScenes();
+
+   int a = 0;
+   srand((unsigned int)&a);
 
    return TRUE;
 }

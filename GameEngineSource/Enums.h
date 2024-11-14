@@ -17,6 +17,8 @@ enum class eLayerType
 	//Tree
 	//Character
 	Player,
+	Animal,
+	Particle,
 	Max = 16,
 };
 
