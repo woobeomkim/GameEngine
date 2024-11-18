@@ -106,6 +106,7 @@
     <ClInclude Include="CollisionManager.h">
       <Filter>Component\Collider</Filter>
     </ClInclude>
+    <ClInclude Include="DontDestroyOnLoad.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -275,5 +276,6 @@
     <ClCompile Include="CollisionManager.cpp">
       <Filter>Component\Collider</Filter>
     </ClCompile>
+    <ClCompile Include="DontDestroyOnLoad.cpp" />
   </ItemGroup>
 </Project>

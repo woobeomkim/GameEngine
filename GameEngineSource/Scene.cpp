@@ -89,3 +89,9 @@ void Scene::CreateLayers()
 		mLayers[i] = new Layer();
 	}
 }
+
+void Scene::EraseGameObject(GameObject* gameObj)
+{
+	eLayerType layerType = gameObj->GetLayerType();
+	mLayers[(UINT)layerType]->EraseGameObject(gameObj);
+}

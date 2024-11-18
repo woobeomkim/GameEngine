@@ -60,11 +60,15 @@ public:
 
 	bool IsActive() { return eState::Active == mState; }
 	bool IsDead() { return mState == eState::Dead; }
+
+	void SetLayerType(eLayerType layerType) { mLayerType = layerType; }
+	eLayerType GetLayerType() { return mLayerType; }
 private:
 	void initializeTransform();
 	void death() { mState = eState::Dead; }
 private:
 	eState mState;
 	std::vector<Component*> mComponents;
+	eLayerType mLayerType;
 };
 

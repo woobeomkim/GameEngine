@@ -10,6 +10,7 @@ template<typename T>
 static T* Instantiate(eLayerType type)
 {
 	T* gameObject = new T();
+	gameObject->SetLayerType(type);
 	Scene* activeScene = SceneManager::GetActiveScene();
 	Layer* layer = activeScene->GetLayer(type);
 	layer->AddGameObject(gameObject);
@@ -20,6 +21,7 @@ template<typename T>
 static T* Instantiate(eLayerType type, Vector2 pos)
 {
 	T* gameObject = new T();
+	gameObject->SetLayerType(type);
 	Scene* activeScene = SceneManager::GetActiveScene();
 	Layer* layer = activeScene->GetLayer(type);
 	layer->AddGameObject(gameObject);
@@ -30,3 +32,8 @@ static T* Instantiate(eLayerType type, Vector2 pos)
 	return gameObject;
 }
 
+static void DontDestroyOnLoad(GameObject* gameObject)
+{
+	Scene* activeScene = SceneManager::GetActiveScene();
+	activeScene->Erase
+}

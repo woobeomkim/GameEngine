@@ -29,8 +29,10 @@ public:
 	static void Release();
 
 	static Scene* GetActiveScene() { return mActiveScene; }
+	static Scene* GetDontDestroyScene() { return mDontDestroyOnLoad; }
 private:
 	static std::map<std::wstring, Scene*> mScene;
 	static Scene* mActiveScene;
+	static Scene* mDontDestroyOnLoad;
 };
 

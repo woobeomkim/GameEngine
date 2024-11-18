@@ -21,6 +21,7 @@ public:
 
 	void AddGameObject(GameObject* gameObject,const eLayerType type);
 	void CreateLayers();
+	void EraseGameObject(GameObject* gameObj);
 	Layer* GetLayer(eLayerType type) {	return mLayers[(UINT)type]; }
 
 private:

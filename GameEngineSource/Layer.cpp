@@ -64,7 +64,7 @@ void Layer::Destroy()
 {
 	std::vector<GameObject*> deleteObjects = {};
 	findDeadGameObjects(deleteObjects);
-	eraseGameObjects();
+	eraseDeadGameObjects();
 	deleteGameObjects(deleteObjects);
 }
 void Layer::AddGameObject(GameObject* gameObject)
@@ -72,6 +72,14 @@ void Layer::AddGameObject(GameObject* gameObject)
 	if (gameObject == nullptr)
 		return;
 	mGameObjects.push_back(gameObject);
+}
+
+void Layer::EraseGameObject(GameObject* eraseGameObj)
+{
+	std::erase_if(mGameObjects, [=](GameObject* gameObj)
+		{
+			return gameObj == eraseGameObj;
+		});
 }
 
 void Layer::findDeadGameObjects(OUT std::vector<GameObject*>& gameObjs)
@@ -94,7 +102,7 @@ void Layer::deleteGameObjects(std::vector<GameObject*>& gameObjs)
 	}
 }
 
-void Layer::eraseGameObjects()
+void Layer::eraseDeadGameObjects()
 {
 	std::erase_if(mGameObjects,
 		[](GameObject* gameObj)
