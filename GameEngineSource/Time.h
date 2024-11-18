@@ -8,7 +8,7 @@ public:
 	static void Update();
 	static void Render(HDC hdc);
 
-	static float DeltaTime() { return mDeltaTimeValue; }
+	__forceinline static float DeltaTime() { return mDeltaTimeValue; }
 private:
 	static LARGE_INTEGER mCPUFrequency;
 	static LARGE_INTEGER mPrevFrequency;

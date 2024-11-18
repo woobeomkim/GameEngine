@@ -25,6 +25,9 @@ public:
 	static void Update();
 	static void LateUpdate();
 	static void Render(HDC hdc);
+	static void Destroy();
+	static void Release();
+
 	static Scene* GetActiveScene() { return mActiveScene; }
 private:
 	static std::map<std::wstring, Scene*> mScene;

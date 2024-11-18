@@ -27,6 +27,9 @@ public:
 	void LateUpdate() override;
 	void Render(HDC hdc) override;
 
+	void SetPlayer(GameObject* player) { mPlayer = player; }
+	void SetDest(Vector2 dest) { mDest = dest; }
+	Vector2 GetDest() { return mDest; }
 private:
 	void sitDown();
 	void move();
@@ -35,9 +38,14 @@ private:
 	void PlayWalkAnimationByDirection(eDirection dir);
 	void translate(class Transform* tr);
 private:
+	Vector2 mDest;
 	eState mState;
 	class Animator* mAnimator;
 	eDirection mDir;
 	float mTime;
+	float mDeathTime;
+
+	GameObject* mPlayer;
+	float mRadian;
 };
 

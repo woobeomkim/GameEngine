@@ -31,10 +31,10 @@ public:
 	static void Init();
 	static void Update();
 
-	static bool GetKeyDown(eKeyCode keyCode) { return mKeys[(UINT)keyCode].state == eKeyState::Down; }
-	static bool GetKeyUp(eKeyCode keyCode){ return mKeys[(UINT)keyCode].state == eKeyState::Up; }
-	static bool GetKey(eKeyCode keyCode){ return mKeys[(UINT)keyCode].state == eKeyState::Pressed; }
-	static Vector2 GetMousePos() { return mMousePos; }
+	__forceinline static bool GetKeyDown(eKeyCode keyCode) { return mKeys[(UINT)keyCode].state == eKeyState::Down; }
+	__forceinline static bool GetKeyUp(eKeyCode keyCode){ return mKeys[(UINT)keyCode].state == eKeyState::Up; }
+	__forceinline static bool GetKey(eKeyCode keyCode){ return mKeys[(UINT)keyCode].state == eKeyState::Pressed; }
+	__forceinline static Vector2 GetMousePos() { return mMousePos; }
 private:
 	static void CreateKeys();
 	static void UpdateKeys();

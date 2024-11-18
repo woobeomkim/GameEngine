@@ -7,6 +7,9 @@
 #include <string>
 #include <assert.h>
 #include <functional>
+#include <filesystem>
+#include <math.h>
+#include <bitset>
 
 #include <mmsystem.h>
 

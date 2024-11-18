@@ -2,6 +2,8 @@
 #include "Input.h"
 #include "Time.h"
 #include "SceneManager.h"
+#include "Resources.h"
+#include "CollisionManager.h"
 
 Application::Application()
 	:mHwnd(nullptr)
@@ -26,6 +28,8 @@ void Application::Init(HWND hwnd, UINT width, UINT height)
 
 void Application::Run()
 {
+	Destroy();
+
 	Update();
 	LateUpdate();
 	Render();
@@ -36,19 +40,33 @@ void Application::Update()
 	Input::Update();
 	Time::Update();
 	SceneManager::Update();
+	CollisionManager::Update();
 }
 
 void Application::LateUpdate()
 {
 	SceneManager::LateUpdate();
+	CollisionManager::LateUpdate();
 }
 
 void Application::Render()
 {
-	Rectangle(mBackHdc, -1, -1, mWidth, mHeight);
+	clearRenderTarget();
 	Time::Render(mBackHdc);
 	SceneManager::Render(mBackHdc);
+	CollisionManager::Render(mBackHdc);
 	BitBlt(mHdc, 0, 0, mWidth, mHeight, mBackHdc, 0, 0, SRCCOPY);
+}
+
+void Application::Release()
+{
+	SceneManager::Release();
+	Resources::Release();
+}
+
+void Application::Destroy()
+{
+	SceneManager::Destroy();
 }
 
 void Application::adjustWindowRect(HWND hwnd, UINT width, UINT height)
@@ -80,4 +98,16 @@ void Application::initEtc()
 	Input::Init();
 	Time::Init();
 	SceneManager::Init();
+	CollisionManager::Init();
+}
+
+void Application::clearRenderTarget()
+{
+	HBRUSH grayBrush = (HBRUSH)CreateSolidBrush(RGB(128, 128, 128));
+	HBRUSH oldBrush = (HBRUSH)SelectObject(mBackHdc, grayBrush);
+
+	Rectangle(mBackHdc, -1, -1, mWidth, mHeight);
+
+	SelectObject(mBackHdc, oldBrush);
+	DeleteObject(grayBrush);
 }

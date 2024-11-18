@@ -21,6 +21,7 @@ Animation::Animation()
 
 Animation::~Animation()
 {
+ 
 }
 
 void Animation::Update()
@@ -59,22 +60,37 @@ void Animation::Render(HDC hdc)
 
     if (type == eTextureType::Bmp)
     {
-        BLENDFUNCTION func = {};
-        func.BlendOp = AC_SRC_OVER;
-        func.BlendFlags = 0;
-        func.AlphaFormat = AC_SRC_ALPHA;
-        func.SourceConstantAlpha = 255;
-
-        AlphaBlend(hdc
-            , pos.x - (sprite.size.x / 2.0f), pos.y - (sprite.size.y / 2.0f)
-            , sprite.size.x * scale.x
-            , sprite.size.y * scale.y
-            , imageHdc
-            , sprite.leftTop.x
-            , sprite.leftTop.y
-            , sprite.size.x
-            , sprite.size.y
-            , func);
+        if (mTexture->IsAlpha())
+        {
+            BLENDFUNCTION func = {};
+            func.BlendOp = AC_SRC_OVER;
+            func.BlendFlags = 0;
+            func.AlphaFormat = AC_SRC_ALPHA;
+            func.SourceConstantAlpha = 255;
+        
+            AlphaBlend(hdc
+                , pos.x - (sprite.size.x / 2.0f), pos.y - (sprite.size.y / 2.0f)
+                , sprite.size.x * scale.x
+                , sprite.size.y * scale.y
+                , imageHdc
+                , sprite.leftTop.x
+                , sprite.leftTop.y
+                , sprite.size.x
+                , sprite.size.y
+                , func);
+        }
+        else
+        {
+            TransparentBlt(hdc, pos.x - (sprite.size.x / 2.0f), pos.y - (sprite.size.y / 2.0f)
+                , sprite.size.x * scale.x
+                , sprite.size.y * scale.y
+                , imageHdc
+                , sprite.leftTop.x
+                , sprite.leftTop.y
+                , sprite.size.x
+                , sprite.size.y
+                , RGB(255, 0, 255));
+        }
     }
     else if (type == eTextureType::Png)
     {

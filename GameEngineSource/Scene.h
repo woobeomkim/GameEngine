@@ -14,6 +14,7 @@ public:
 	virtual void Update();
 	virtual void LateUpdate();
 	virtual void Render(HDC hdc);
+	virtual void Destroy();
 
 	virtual void OnEnter();
 	virtual void OnExit();
@@ -21,6 +22,7 @@ public:
 	void AddGameObject(GameObject* gameObject,const eLayerType type);
 	void CreateLayers();
 	Layer* GetLayer(eLayerType type) {	return mLayers[(UINT)type]; }
+
 private:
 	std::vector<Layer*> mLayers;
 };

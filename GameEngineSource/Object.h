@@ -29,3 +29,4 @@ static T* Instantiate(eLayerType type, Vector2 pos)
 
 	return gameObject;
 }
+

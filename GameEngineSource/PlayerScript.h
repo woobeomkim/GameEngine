@@ -21,6 +21,12 @@ public:
 	
 	void AttackEffect();
 
+
+	void OnCollisionEnter(class Collider* other) override;
+	void OnCollisionStay(class Collider* other) override;
+	void OnCollisionExit(class Collider* other) override;
+
+
 private:
 	void idle();
 	void move();

@@ -4,6 +4,7 @@
 #include "Transform.h"
 
 GameObject::GameObject()
+	: mState(eState::Active)
 {
 	mComponents.resize((UINT)eComponentType::End);
 	initializeTransform();
@@ -75,4 +76,10 @@ void GameObject::Render(HDC hdc)
 void GameObject::initializeTransform()
 {
 	AddComponent<Transform>();
+}
+
+void Destroy(GameObject* gameObject)
+{
+	if (gameObject != nullptr)
+		gameObject->death();
 }

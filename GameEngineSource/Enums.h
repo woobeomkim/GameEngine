@@ -3,9 +3,10 @@
 enum class eComponentType
 {
 	Transform,
+	Collider,
+	Script,
 	SpriteRenderer,
 	Animator,
-	Script,
 	Camera,
 	End,
 };
@@ -35,5 +36,12 @@ enum class eTextureType
 {
 	Bmp,
 	Png,
+	End,
+};
+
+enum class eColliderType
+{
+	Circle2D,
+	Rect2D,
 	End,
 };

@@ -2,9 +2,21 @@
 #include "CommonInclude.h"
 #include "Component.h"
 
+void Destroy(GameObject* gameObject);
+
 class GameObject
 {
+	friend void Destroy(GameObject* gmaeObject);
+
 public:
+
+	enum class eState
+	{
+		Active,
+		Paused,
+		Dead,
+		End,
+	};
 	GameObject();
 	virtual ~GameObject();
 
@@ -38,11 +50,21 @@ public:
 
 		return component;
 	}
+	
+	eState GetState() { return mState; }
+	void SetState(bool power) 
+	{
+		if (power) mState = eState::Active;
+		else mState = eState::Paused;
+	}
 
+	bool IsActive() { return eState::Active == mState; }
+	bool IsDead() { return mState == eState::Dead; }
 private:
 	void initializeTransform();
-
+	void death() { mState = eState::Dead; }
 private:
+	eState mState;
 	std::vector<Component*> mComponents;
 };
 

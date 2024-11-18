@@ -10,6 +10,11 @@ Scene::Scene()
 
 Scene::~Scene()
 {
+	for (Layer* layer : mLayers)
+	{
+		delete layer;
+		layer = nullptr;
+	}
 }
 
 void Scene::Init()
@@ -50,6 +55,16 @@ void Scene::Render(HDC hdc)
 		if (layer == nullptr)
 			continue;
 		layer->Render(hdc);
+	}
+}
+
+void Scene::Destroy()
+{
+	for (Layer* layer : mLayers)
+	{
+		if (layer == nullptr)
+			continue;
+		layer->Destroy();
 	}
 }
 

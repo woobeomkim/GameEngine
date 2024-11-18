@@ -1,10 +1,53 @@
 #include "Texture.h"
 #include "Application.h"
+#include "Resources.h"
 
 extern Application app;
 
+Texture* Texture::Create(const std::wstring& name, UINT width, UINT height)
+{
+    Texture* image = Resources::Find<Texture>(name);
+    if (image)
+        return image;
+
+    image = new Texture();
+    image->SetName(name);
+    image->SetWidth(width);
+    image->SetHeight(height);
+
+    HDC hdc = app.GetMainHdc();
+    HWND hwnd = app.GetHwnd();
+
+    image->mBitmap = CreateCompatibleBitmap(hdc, width, height);
+    image->mHdc = CreateCompatibleDC(hdc);
+
+    HBRUSH transparentBrush = (HBRUSH)CreateSolidBrush(NULL_BRUSH);
+    HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);
+
+    Rectangle(hdc, -1, -1, width + 1, height + 1);
+
+    SelectObject(hdc, oldBrush);
+    DeleteObject(transparentBrush);
+
+    image->mType = eTextureType::Bmp;
+
+    HBITMAP oldBitmp = (HBITMAP)SelectObject(image->mHdc, image->mBitmap);
+    DeleteObject(oldBitmp);
+
+    Resources::Insert(name + L"Image", image);
+
+    return image;
+}
+
 Texture::Texture()
     : Resource(eResourceType::Texture)
+    , mbAlpah(false)
+    , mType(eTextureType::End)
+    , mImage(nullptr)
+    , mBitmap(nullptr)
+    , mHdc(nullptr)
+    , mWidth(0)
+    , mHeight(0)
 {
 }
 
@@ -30,6 +73,11 @@ HRESULT Texture::Load(const std::wstring& path)
         mWidth = info.bmWidth;
         mHeight = info.bmHeight;
 
+        if (info.bmBitsPixel == 24)
+            mbAlpah = false;
+        else if (info.bmBitsPixel == 32)
+            mbAlpah = true;
+
         HDC mainDC = app.GetMainHdc();
         mHdc = CreateCompatibleDC(mainDC);
 
@@ -48,3 +96,4 @@ HRESULT Texture::Load(const std::wstring& path)
     }
     return S_OK;
 }
+

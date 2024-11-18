@@ -4,12 +4,17 @@
 #include "Animator.h"
 #include "Time.h"
 #include "Transform.h"
+#include "Object.h"
+#include "Input.h"
 
 CatScript::CatScript()
 	:mState(eState::SitDown)
 	, mAnimator(nullptr)
 	, mDir(eDirection::End)
 	, mTime(0.0f)
+	, mDeathTime(0.0f)
+	, mDest(Vector2::Zero)
+	, mRadian(0.0f)
 {
 
 }
@@ -23,6 +28,10 @@ void CatScript::Init()
 
 void CatScript::Update()
 {
+	mDeathTime += Time::DeltaTime();
+	if (mDeathTime > 6.0)
+		Destroy(GetOwner());
+
 	if (mAnimator == nullptr)
 		mAnimator = GetOwner()->GetComponent<Animator>();
 
@@ -57,14 +66,42 @@ void CatScript::Render(HDC hdc)
 void CatScript::sitDown()
 {
 	mTime += Time::DeltaTime();
-	if (mTime > 3.0f)
+
+	Transform* tr = GetOwner()->GetComponent<Transform>();
+	Vector2 pos = tr->GetPosition();
+
+	mDest = Input::GetMousePos();
+	Transform* plTr = mPlayer->GetComponent<Transform>();
+	Vector2 dest = mDest - plTr->GetPosition();
+	pos += dest.normalize() * (100.0f * Time::DeltaTime());
+
+	// 삼각함수를 통한 이동
+
+	/*mRadian += 5.0f * Time::DeltaTime();
+	pos += Vector2(1.0f, 2.0f * cosf(mRadian)) * (100.0f * Time::DeltaTime());*/
+
+	// 마우스 위치 방향으로 회전후 마우스 위치 이동 ( 벡터의 뻴셈 활용)
+	//Transform* plTr = mPlayer->GetComponent<Transform>();
+	//Vector2 dest = mDest - plTr->GetPosition();
+	//dest.normalize();
+	//
+	//float rotDegree = Vector2::Dot(dest, Vector2::Right);
+	//rotDegree = acosf(rotDegree);
+	//
+	//rotDegree = ConvertDegree(rotDegree);
+	//
+	//dest = Vector2::Rotate(dest, rotDegree);
+	//pos += dest * (100.0f * Time::DeltaTime());
+
+	tr->SetPos(pos);
+	/*if (mTime > 3.0f)
 	{
 		mState = CatScript::eState::Walk;
 		int direction = rand() % (UINT)eDirection::End;
 		mDir = (eDirection)direction;
 		PlayWalkAnimationByDirection(mDir);
 		mTime = 0.0f;
-	}
+	}*/
 }
 
 void CatScript::move()
