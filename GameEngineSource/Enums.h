@@ -16,6 +16,7 @@ enum class eLayerType
 	None,
 	BackGround,
 	//Tree
+	Tile,
 	//Character
 	Player,
 	Animal,

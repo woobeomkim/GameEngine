@@ -35,5 +35,8 @@ static T* Instantiate(eLayerType type, Vector2 pos)
 static void DontDestroyOnLoad(GameObject* gameObject)
 {
 	Scene* activeScene = SceneManager::GetActiveScene();
-	activeScene->Erase
+	activeScene->EraseGameObject(gameObject);
+	
+	Scene* dontDestroyOnLoad = SceneManager::GetDontDestroyScene();
+	dontDestroyOnLoad->AddGameObject(gameObject, gameObject->GetLayerType());
 }

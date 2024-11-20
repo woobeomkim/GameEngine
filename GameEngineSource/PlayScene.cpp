@@ -31,8 +31,6 @@ PlayScene::~PlayScene()
 
 void PlayScene::Init()
 {
-	CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Animal, true);
-
 	GameObject* camera = Instantiate<GameObject>(eLayerType::Particle, Vector2(app.GetWidth() / 2, app.GetHeight() / 2));
 	Camera* cameraComp = camera->AddComponent<Camera>();
 	mainCamera = cameraComp;
@@ -105,6 +103,8 @@ void PlayScene::Render(HDC hdc)
 
 void PlayScene::OnEnter()
 {
+	CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Animal, true);
+
 	Scene::OnEnter();
 }
 

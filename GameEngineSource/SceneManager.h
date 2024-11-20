@@ -20,6 +20,8 @@ public:
 	}
 
 	static Scene* LoadScene(const std::wstring& name);
+	static std::vector<class GameObject*> GetGameObjects(eLayerType layer);
+
 
 	static void Init();
 	static void Update();

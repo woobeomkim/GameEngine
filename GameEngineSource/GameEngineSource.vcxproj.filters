@@ -32,7 +32,7 @@
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Player</Filter>
+      <Filter>GameObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="SpriteRenderer.h">
       <Filter>Component\SpriteRenderer</Filter>
@@ -92,7 +92,7 @@
       <Filter>Component\Script\CatScript</Filter>
     </ClInclude>
     <ClInclude Include="Cat.h">
-      <Filter>Player\Animal</Filter>
+      <Filter>GameObject\Animal</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>Component\Collider</Filter>
@@ -106,7 +106,19 @@
     <ClInclude Include="CollisionManager.h">
       <Filter>Component\Collider</Filter>
     </ClInclude>
-    <ClInclude Include="DontDestroyOnLoad.h" />
+    <ClInclude Include="DontDestroyOnLoad.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>GameObject\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="TilemapRenderer.h">
+      <Filter>Component\TilemapRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolScene.h" />
+    <ClInclude Include="CameraScript.h">
+      <Filter>Component\Script</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -129,9 +141,6 @@
     </Filter>
     <Filter Include="Component">
       <UniqueIdentifier>{baf48d1a-280a-4dc7-b55e-850ec61f99e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Player">
-      <UniqueIdentifier>{16322a90-777f-4703-acdc-e4b92187c9d5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Component\SpriteRenderer">
       <UniqueIdentifier>{64e0e226-04db-4f87-9a2e-6d1ef9d9619e}</UniqueIdentifier>
@@ -172,9 +181,6 @@
     <Filter Include="Component\Script\CatScript">
       <UniqueIdentifier>{b4517edd-a948-4a23-84f5-724ff0fe9eca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Player\Animal">
-      <UniqueIdentifier>{de149746-d9a2-4ee4-9299-7e442a62ae88}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Component\Collider">
       <UniqueIdentifier>{8e15f6e6-2339-4ab2-ae97-adf1aa4774bb}</UniqueIdentifier>
     </Filter>
@@ -183,6 +189,18 @@
     </Filter>
     <Filter Include="Component\Collider\CircleCollider">
       <UniqueIdentifier>{b053878b-9897-4c80-a23f-ea17b4bd5908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Player">
+      <UniqueIdentifier>{16322a90-777f-4703-acdc-e4b92187c9d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Animal">
+      <UniqueIdentifier>{de149746-d9a2-4ee4-9299-7e442a62ae88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Tile">
+      <UniqueIdentifier>{05835947-77f8-4cb3-8933-90e037cfeeed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component\TilemapRenderer">
+      <UniqueIdentifier>{f0b2a239-e6fa-4b1c-91f0-9a0cd1e8bf36}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -214,7 +232,7 @@
       <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Player</Filter>
+      <Filter>GameObject\Player</Filter>
     </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Component\SpriteRenderer</Filter>
@@ -262,7 +280,7 @@
       <Filter>Component\Script\CatScript</Filter>
     </ClCompile>
     <ClCompile Include="Cat.cpp">
-      <Filter>Player\Animal</Filter>
+      <Filter>GameObject\Animal</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>Component\Collider</Filter>
@@ -276,6 +294,18 @@
     <ClCompile Include="CollisionManager.cpp">
       <Filter>Component\Collider</Filter>
     </ClCompile>
-    <ClCompile Include="DontDestroyOnLoad.cpp" />
+    <ClCompile Include="DontDestroyOnLoad.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>GameObject\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="TilemapRenderer.cpp">
+      <Filter>Component\TilemapRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolScene.cpp" />
+    <ClCompile Include="CameraScript.cpp">
+      <Filter>Component\Script</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

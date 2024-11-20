@@ -4,7 +4,7 @@
 extern Application app;
 
 std::vector<Input::Key> Input::mKeys = {};
-Vector2 Input::mMousePos = {};
+Vector2 Input::mMousePos = Vector2::One;
 
 int ASCII[(UINT)eKeyCode::END] = {
 	'Q','W','E','R','T','Y','U','I','O','P',
@@ -117,9 +117,18 @@ void Input::getMousePositionByWindow()
 {
 	POINT mousePos = {};
 	GetCursorPos(&mousePos);
-	ClientToScreen(app.GetHwnd(), &mousePos);
-	mMousePos.x = mousePos.x;
-	mMousePos.y = mousePos.y;
+	ScreenToClient(app.GetHwnd(), &mousePos);
+	
+	UINT width = app.GetWidth();
+	UINT height = app.GetHeight();
+	
+	mMousePos.x = -1.0f;
+	mMousePos.y = -1.0f;
+
+	if (mousePos.x > 0 && mousePos.x < width)
+		mMousePos.x = mousePos.x;
+	if (mousePos.y > 0 && mousePos.y < height)
+		mMousePos.y = mousePos.y;
 }
 
 void Input::clearKeys()
