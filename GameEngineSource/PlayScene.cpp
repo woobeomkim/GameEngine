@@ -18,6 +18,7 @@
 #include "CatScript.h"
 #include "BoxCollider2D.h"
 #include "CollisionManager.h"
+#include "Rigidbody.h"
 
 extern Application app;
 
@@ -43,6 +44,7 @@ void PlayScene::Init()
 	//Transform* playerTr = mPlayer->GetComponent<Transform>();
 	//playerTr->SetScale(Vector2(1.0f, 1.0f));
 	//playerTr->SetRotation(90);
+	mPlayer->AddComponent<Rigidbody>();
 	
 	Texture* playerTex = Resources::Find<Texture>(L"Player");
 	Animator* playerAnimator = mPlayer->AddComponent<Animator>();

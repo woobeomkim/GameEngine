@@ -4,6 +4,7 @@ enum class eComponentType
 {
 	Transform,
 	Collider,
+	Rigidbody,
 	Script,
 	SpriteRenderer,
 	Animator,

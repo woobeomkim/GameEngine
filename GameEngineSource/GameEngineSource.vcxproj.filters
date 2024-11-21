@@ -28,9 +28,6 @@
     <ClInclude Include="PlayScene.h">
       <Filter>PlayScene</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Component</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>GameObject\Player</Filter>
     </ClInclude>
@@ -119,6 +116,12 @@
     <ClInclude Include="CameraScript.h">
       <Filter>Component\Script</Filter>
     </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>Component\Rigidbody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Common">
@@ -202,6 +205,9 @@
     <Filter Include="Component\TilemapRenderer">
       <UniqueIdentifier>{f0b2a239-e6fa-4b1c-91f0-9a0cd1e8bf36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Component\Rigidbody">
+      <UniqueIdentifier>{e900596e-4c02-46f3-877e-04bdf8489b46}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp">
@@ -227,9 +233,6 @@
     </ClCompile>
     <ClCompile Include="PlayScene.cpp">
       <Filter>PlayScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>GameObject\Player</Filter>
@@ -306,6 +309,12 @@
     <ClCompile Include="ToolScene.cpp" />
     <ClCompile Include="CameraScript.cpp">
       <Filter>Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>Component\Rigidbody</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

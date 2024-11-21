@@ -6,6 +6,7 @@
 #include "..\GameEngineSource\Application.h"
 #include "..\GameEngineSource\LoadScenes.h"
 #include "..\GameEngineSource\LoadResources.h"
+#include "..\\GameEngineSource\\SceneManager.h"
 
 #pragma comment(lib,"..\\x64\\Debug\\GameEngineSource.lib")
 
@@ -127,10 +128,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
-   HWND ToolHWnd = CreateWindowW(L"TILEWINDOW", L"TileWindow", WS_OVERLAPPEDWINDOW,
-       0, 0, width, height, nullptr, nullptr, hInstance, nullptr);
-
-
+ 
    app.Init(hWnd, width, height);
 
    if (!hWnd)
@@ -151,17 +149,27 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    int a = 0;
    srand((unsigned int)&a);
 
-   Texture* texture = Resources::Find<Texture>(L"SpringFloor");
+   Scene* activeScene = SceneManager::GetActiveScene();
+    
+   std::wstring name = activeScene->GetName();
+   if (name == L"ToolScene")
+   { 
+       // Tile 윈도우 크기 조정 -- TOOL
+       HWND ToolHWnd = CreateWindowW(L"TILEWINDOW", L"TileWindow", WS_OVERLAPPEDWINDOW,
+           0, 0, width, height, nullptr, nullptr, hInstance, nullptr);
 
-   RECT rect = { 0,0,texture->GetWidth(),texture->GetHeight() };
-   AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
+       Texture* texture = Resources::Find<Texture>(L"SpringFloor");
 
-   UINT toolWidth = rect.right - rect.left;
-   UINT toolHeight = rect.bottom - rect.top;
+       RECT rect = { 0,0,texture->GetWidth(),texture->GetHeight() };
+       AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
-   SetWindowPos(ToolHWnd, nullptr, width, 0, toolWidth, toolHeight, 0);
-   ShowWindow(ToolHWnd, true);
-   UpdateWindow(ToolHWnd);
+       UINT toolWidth = rect.right - rect.left;
+       UINT toolHeight = rect.bottom - rect.top;
+
+       SetWindowPos(ToolHWnd, nullptr, width, 0, toolWidth, toolHeight, 0);
+       ShowWindow(ToolHWnd, true);
+       UpdateWindow(ToolHWnd);
+   }
    return TRUE;
 }
 
